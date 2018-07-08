@@ -5,45 +5,72 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>User</h2>
-
+<h2>User Details</h2>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
 <div>
     <h4>User</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Avatar)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Avatar)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-    </dl>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <img src="@Model.Avatar" alt="@Model.Name" class="img-circle">
+            </div>
+            <div class="col-md-3">
+                <p>@Model.Name</p>
+                <p>@Model.Email</p>
+            </div>
+            <div class="col-md-3">
+                <p>Full Address:</p>
+                <p>@Model.Address.Country</p>
+                <p>@Model.Address.City</p>
+                <p>@Model.Address.Street</p>
+                <p>@Model.Address.Zip</p>
+            </div>
+            <div class="col-md-2">
+                <p>Number of Posts:</p>
+                <p>@Model.Posts.Count</p>
+            </div>
+            <div class="col-md-2">
+                <p>Number of comments</p>
+                <p>@Model.Comments.Count</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>User Posts:</h4>
+        </div>
+        @foreach (var post in Model.Posts)
+        {
+            <div class="col-md-12">
+                <h4>@post.Title</h4>
+                <a href="#@post.Id" class="btn btn-info" data-toggle="collapse">Show post</a>
+                <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> @post.Likes
+                <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> @post.Comments.Count
+            </div>
+            <div id="@post.Id" class="collapse">
+                <div class="col-md-12">
+                    @post.Body
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-11 col-md-offset-1">
+                        <h5>Comments:</h5>
+                        @foreach (var comment in post.Comments)
+                        {
+                            <p>
+                                Date: @comment.CreatedAt
+                                <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> @comment.Likes
+                            </p>
+                            <p>
+                                @comment.Body
+                            </p>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
-</div>
+
