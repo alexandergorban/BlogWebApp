@@ -1,8 +1,25 @@
-﻿
+﻿@model IEnumerable<BlogWebApp.Models.Post>
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Posts</h2>
-
+<div class="row">
+    @foreach (var post in Model)
+    {
+    <div class="col-md-12">
+        <div class="col-md-12">
+            <h4>@Html.ActionLink(@post.Title, "PostDetails", new { postId = post.Id })</h4>
+        </div>
+        <div class="col-md-12">
+            <p>
+                @post.CreatedAt
+                <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> @post.Likes
+                <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> @post.Comments.Count
+            </p>
+        </div>
+    </div>
+    }
+</div>

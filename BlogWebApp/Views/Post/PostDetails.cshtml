@@ -1,0 +1,51 @@
+﻿@model BlogWebApp.Models.Post
+
+@{
+    ViewData["Title"] = "Post";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Post</h2>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<div>
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            <h3>@Model.Title</h3>
+        </div>
+        <div class="col-md-12">
+            <p>
+                @Model.CreatedAt
+                <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> @Model.Likes
+                <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> @Model.Comments.Count
+            </p>
+        </div>
+        <div class="col-md-12">
+            <p>@Model.Body</p>
+        </div>
+        <div class="col-md-12">
+            @if (@Model.Comments.Count != 0)
+            {
+                <a href="#@Model.Id" class="btn btn-info" data-toggle="collapse">Show comments</a>
+                <div id="@Model.Id" class="collapse">
+                    <div class="col-md-11 col-md-offset-1">
+                        <h5>Comments:</h5>
+                        @foreach (var comment in Model.Comments)
+                        {
+                            <p>
+                                @comment.Body
+                            </p>
+                            <p>
+                                Date: @comment.CreatedAt
+                                <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> @comment.Likes
+                            </p>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

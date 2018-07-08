@@ -29,6 +29,25 @@ namespace BlogWebApp.Services
             return user;
         }
 
+        public List<Post> GetPosts()
+        {
+            var posts = _complexlyFilledUsers
+                .SelectMany(user => user.Posts)
+                .OrderByDescending(post => post.CreatedAt)
+                .ToList();
+
+            return posts;
+        }
+
+        public Post GetPost(int postId)
+        {
+            var post = _complexlyFilledUsers
+                .SelectMany(user => user.Posts)
+                .FirstOrDefault(p => p.Id == postId);
+
+            return post;
+        }
+
         //1. Get the number of comments under the posts of a particular user(by Id)
         public List<(Post Post, int Comments)> GetNumberOfCommentsUnderUserPosts(int userId)
         {
