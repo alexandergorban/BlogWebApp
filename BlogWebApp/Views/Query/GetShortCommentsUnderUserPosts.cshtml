@@ -1,0 +1,58 @@
+﻿@model BlogWebApp.ViewModels.QueryViewModel<List<Comment>>
+
+
+@{
+    ViewData["Title"] = "GetShortCommentsUnderUserPosts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br/>
+<div>
+    <a class="btn btn-default" asp-action="Index">Back to Queries List</a>
+</div>
+<h4>2. Get a list of comments under the posts of a particular user (by Id)</h4>
+<div class="col-md-12">
+    @using (Html.BeginForm("GetShortCommentsUnderUserPosts", "Query", FormMethod.Post))
+    {
+    <div class="col-md-12">
+        @Html.LabelFor(m => m.Id)
+    </div>
+    <div class="col-md-12">
+        @Html.TextBoxFor(x => x.Id)
+    </div>
+    <div class="col-md-12">
+        @Html.ValidationMessageFor(m => m.Id, "")
+    </div>
+    <div class="col-md-12">
+        <input type="submit" class="btn btn-primary" value="Search" />
+    </div>
+    }
+</div>
+<div class="col-md-12">
+    @if (Model.IsExistQueryResult && Model.QueryResult != null)
+    {
+        @if (Model.QueryResult.Count != 0)
+        {
+            <div class="col-md-12">
+                <h4>Query Result:</h4>
+            </div>
+            @foreach (var result in Model.QueryResult)
+             {
+                 <div class="col-md-12">
+                     <div class="col-md-12">
+                         <p>Body: @result.Body</p>
+                     </div>
+                     <div class="col-md-12">
+                         <p>Body Lenght: @result.Body.Length</p>
+                     </div>
+                 </div>
+             }
+        }
+         else
+         {
+             <div class="col-md-12">
+                 <p>The query result is missing.</p>
+             </div>
+         }
+    }
+</div>

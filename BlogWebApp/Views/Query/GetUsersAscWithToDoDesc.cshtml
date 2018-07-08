@@ -1,0 +1,52 @@
+﻿@model BlogWebApp.ViewModels.QueryViewModel<List<User>>
+
+
+@{
+    ViewData["Title"] = "GetUsersAscWithToDoDesc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br/>
+<div>
+    <a class="btn btn-default" asp-action="Index">Back to Queries List</a>
+</div>
+<h4>4. Get a list of users in alphabetical order (ascending) with sorted To Do items by length name (descending)</h4>
+<div class="col-md-12">
+    @using (Html.BeginForm("GetUsersAscWithToDoDesc", "Query", FormMethod.Post))
+    {
+        <div class="col-md-12">
+            <input type="submit" class="btn btn-primary" value="Search" />
+        </div>
+    }
+</div>
+<div class="col-md-12">
+    @if (Model.IsExistQueryResult && Model.QueryResult != null)
+    {
+        @if (Model.QueryResult.Count != 0)
+        {
+            <div class="col-md-12">
+                <h4>Query Result:</h4>
+            </div>
+            @foreach (var user in Model.QueryResult)
+            {
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <p>Name: @user.Name Email: @user.Email</p>
+                    </div>
+                    <div class="col-md-12">
+                        @foreach (var toDo in user.ToDos)
+                        {
+                            <p>ToDo Name: @toDo.Name</p>
+                        }
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-md-12">
+                <p>The query result is missing.</p>
+            </div>
+         }
+    }
+</div>

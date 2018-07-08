@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Queries Page</h2>
+<div class="col-md-12">
+    <p>@Html.ActionLink("1. Get the number of comments under the posts of a particular user(by Id)", 
+           "GetNumberOfCommentsUnderUserPosts", "Query", null)</p>
+    <p>@Html.ActionLink("2. Get a list of comments under the posts of a particular user (by Id)", 
+           "GetShortCommentsUnderUserPosts", "Query", null)</p>
+    <p>@Html.ActionLink("3. Get the list (id, name) from the list of todos that are executed for a specific user (by Id)", 
+           "GetExecutedToDoByUser", "Query", null)</p>
+    <p>@Html.ActionLink("4. Get a list of users in alphabetical order (ascending) with sorted To Do items by length name (descending)", 
+           "GetUsersAscWithToDoDesc", "Query", null)</p>
+    <p>@Html.ActionLink("5. Get the structure: User, Last Post, Number of comments for last post, Tasks in To Do, most popular post", 
+           "GetUserData", "Query", null)</p>
+    <p>@Html.ActionLink("6. Get the structure: Post, Longest comment of the post, Most liked comment on the post, Number of comments", 
+           "GetPostData", "Query", null)</p>
+</div>

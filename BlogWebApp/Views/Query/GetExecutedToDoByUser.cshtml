@@ -1,0 +1,58 @@
+﻿@model BlogWebApp.ViewModels.QueryViewModel<List<(int Id, string Name)>>
+
+
+@{
+    ViewData["Title"] = "GetExecutedToDoByUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br/>
+<div>
+    <a class="btn btn-default" asp-action="Index">Back to Queries List</a>
+</div>
+<h4>3. Get the list (id, name) from the list of todos that are executed for a specific user (by Id)</h4>
+<div class="col-md-12">
+    @using (Html.BeginForm("GetExecutedToDoByUser", "Query", FormMethod.Post))
+    {
+    <div class="col-md-12">
+        @Html.LabelFor(m => m.Id)
+    </div>
+    <div class="col-md-12">
+        @Html.TextBoxFor(x => x.Id)
+    </div>
+    <div class="col-md-12">
+        @Html.ValidationMessageFor(m => m.Id, "")
+    </div>
+    <div class="col-md-12">
+        <input type="submit" class="btn btn-primary" value="Search" />
+    </div>
+    }
+</div>
+<div class="col-md-12">
+    @if (Model.IsExistQueryResult && Model.QueryResult != null)
+    {
+        @if (Model.QueryResult.Count != 0)
+        {
+            <div class="col-md-12">
+                <h4>Query Result:</h4>
+            </div>
+            @foreach (var result in Model.QueryResult)
+             {
+                 <div class="col-md-12">
+                     <div class="col-md-6">
+                         <p>@result.Id</p>
+                     </div>
+                     <div class="col-md-6">
+                         <p>@result.Name</p>
+                     </div>
+                 </div>
+             }
+        }
+         else
+         {
+             <div class="col-md-12">
+                 <p>The query result is missing.</p>
+             </div>
+         }
+    }
+</div>
