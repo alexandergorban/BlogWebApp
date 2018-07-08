@@ -33,7 +33,7 @@
                 <p>@Model.Posts.Count</p>
             </div>
             <div class="col-md-2">
-                <p>Number of comments</p>
+                <p>Number of comments:</p>
                 <p>@Model.Comments.Count</p>
             </div>
         </div>
@@ -55,19 +55,22 @@
                     @post.Body
                 </div>
                 <div class="col-md-12">
-                    <div class="col-md-11 col-md-offset-1">
-                        <h5>Comments:</h5>
-                        @foreach (var comment in post.Comments)
-                        {
-                            <p>
-                                Date: @comment.CreatedAt
-                                <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> @comment.Likes
-                            </p>
-                            <p>
-                                @comment.Body
-                            </p>
-                        }
-                    </div>
+                    @if (@post.Comments.Count != 0)
+                    {
+                        <div class="col-md-11 col-md-offset-1">
+                            <h5>Comments:</h5>
+                            @foreach (var comment in post.Comments)
+                            {
+                                <p>
+                                    Date: @comment.CreatedAt
+                                    <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> @comment.Likes
+                                </p>
+                                <p>
+                                    @comment.Body
+                                </p>
+                            }
+                        </div>
+                    }
                 </div>
             </div>
         }
