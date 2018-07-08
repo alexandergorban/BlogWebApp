@@ -6,10 +6,10 @@
 }
 
 <h2>To Do</h2>
-<div class="row">
+<div class="row todo-list">
     @foreach (var toDo in Model)
     {
-        <div class="col-md-12">
+        <div class="col-md-12 todo-item">
             <div class="col-md-12">
                 <h4>@Html.ActionLink(@toDo.Name, "TodoDetails", new { postId = toDo.Id })</h4>
             </div>

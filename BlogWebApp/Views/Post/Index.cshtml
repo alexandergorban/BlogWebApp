@@ -6,10 +6,10 @@
 }
 
 <h2>Posts</h2>
-<div class="row">
+<div class="row post-list">
     @foreach (var post in Model)
     {
-    <div class="col-md-12">
+    <div class="col-md-12 post-item">
         <div class="col-md-12">
             <h4>@Html.ActionLink(@post.Title, "PostDetails", new { postId = post.Id })</h4>
         </div>
