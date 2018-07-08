@@ -29,18 +29,21 @@
     }
 </div>
 <div class="col-md-12">
-    @if (Model.IsExistQueryResult && Model.QueryResult != null)
+    @if (Model.IsExistQueryResult)
     {
-        <div class="col-md-12">
-            <h4>Query Result:</h4>
-        </div>
-        <div class="col-md-12">
-            <p>Post Id: @Model.QueryResult.Post.Id</p>
-            <p>1. Post Title: @Model.QueryResult.Post.Title</p>
-            <p>2. The longest comment of the post: @Model.QueryResult.LongestComment</p>
-            <p>3. The most like comment of the post: @Model.QueryResult.MostLikedComment</p>
-            <p>4. Number of unpopular comments under the post: @Model.QueryResult.MostUnpopularCommentsCount</p>
-        </div>
+        @if (Model.QueryResult != null)
+         {
+             <div class="col-md-12">
+                 <h4>Query Result:</h4>
+             </div>
+             <div class="col-md-12">
+                 <p>Post Id: @Model.QueryResult.Post.Id</p>
+                 <p>1. Post Title: @Model.QueryResult.Post.Title</p>
+                 <p>2. The longest comment of the post: @Model.QueryResult.LongestComment</p>
+                 <p>3. The most like comment of the post: @Model.QueryResult.MostLikedComment</p>
+                 <p>4. Number of unpopular comments under the post: @Model.QueryResult.MostUnpopularCommentsCount</p>
+             </div>
+         }
     }
     else
     {

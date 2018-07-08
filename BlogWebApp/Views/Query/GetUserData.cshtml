@@ -29,20 +29,23 @@
     }
 </div>
 <div class="col-md-12">
-    @if (Model.IsExistQueryResult && Model.QueryResult != null)
+    @if (Model.IsExistQueryResult)
     {
-        <div class="col-md-12">
-            <h4>Query Result:</h4>
-        </div>
-        <div class="col-md-12">
-            <p>User Id: @Model.QueryResult.User.Id</p>
-            <p>1. User Name: @Model.QueryResult.User.Name</p>
-            <p>2. Last post by user (by date): @Model.QueryResult.LastPost.Title  Post Date: @Model.QueryResult.LastPost.CreatedAt</p>
-            <p>3. Number of comments under the last post:@Model.QueryResult.LastPost.Comments.Count</p>
-            <p>4. Number of uncompleted tasks for the user: @Model.QueryResult.UncompletedTodosCount</p>
-            <p>5. The most popular user post by comments: @Model.QueryResult.PostWithMaxComments</p>
-            <p>6. The most popular user post by likes: @Model.QueryResult.PostWithMaxLikes</p>
-        </div>
+        @if (Model.QueryResult != null)
+         {
+             <div class="col-md-12">
+                 <h4>Query Result:</h4>
+             </div>
+             <div class="col-md-12">
+                 <p>User Id: @Model.QueryResult.User.Id</p>
+                 <p>1. User Name: @Model.QueryResult.User.Name</p>
+                 <p>2. Last post by user (by date): @Model.QueryResult.LastPost.Title  Post Date: @Model.QueryResult.LastPost.CreatedAt</p>
+                 <p>3. Number of comments under the last post:@Model.QueryResult.LastPost.Comments.Count</p>
+                 <p>4. Number of uncompleted tasks for the user: @Model.QueryResult.UncompletedTodosCount</p>
+                 <p>5. The most popular user post by comments: @Model.QueryResult.PostWithMaxComments</p>
+                 <p>6. The most popular user post by likes: @Model.QueryResult.PostWithMaxLikes</p>
+             </div>
+         }
     }
     else
     {
