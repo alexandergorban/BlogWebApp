@@ -12,6 +12,9 @@
 </div>
 <h4>1. Get the number of comments under the posts of a particular user(by Id)</h4>
 <div class="col-md-12">
+    <div class="col-md-12">
+        <p>Enter User Id:</p>
+    </div>
     @using (Html.BeginForm("GetNumberOfCommentsUnderUserPosts", "Query", FormMethod.Post))
     {
         <div class="col-md-12">
@@ -24,7 +27,7 @@
             @Html.ValidationMessageFor(m => m.Id, "")
         </div>
         <div class="col-md-12">
-            <input type="submit" class="btn btn-primary" value="Search" />
+            <input type="submit" class="btn btn-primary" value="Search"/>
         </div>
     }
 </div>

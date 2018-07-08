@@ -12,20 +12,23 @@
 </div>
 <h4>6. Show the structure: Post, Longest comment of the post, Most liked comment on the post, Number of comments under the post</h4>
 <div class="col-md-12">
+    <div class="col-md-12">
+        <p>Enter Post Id:</p>
+    </div>
     @using (Html.BeginForm("GetPostData", "Query", FormMethod.Post))
     {
-    <div class="col-md-12">
-        @Html.LabelFor(m => m.Id)
-    </div>
-    <div class="col-md-12">
-        @Html.TextBoxFor(x => x.Id)
-    </div>
-    <div class="col-md-12">
-        @Html.ValidationMessageFor(m => m.Id, "")
-    </div>
-    <div class="col-md-12">
-        <input type="submit" class="btn btn-primary" value="Search" />
-    </div>
+        <div class="col-md-12">
+            @Html.LabelFor(m => m.Id)
+        </div>
+        <div class="col-md-12">
+            @Html.TextBoxFor(x => x.Id)
+        </div>
+        <div class="col-md-12">
+            @Html.ValidationMessageFor(m => m.Id, "")
+        </div>
+        <div class="col-md-12">
+            <input type="submit" class="btn btn-primary" value="Search"/>
+        </div>
     }
 </div>
 <div class="col-md-12">
