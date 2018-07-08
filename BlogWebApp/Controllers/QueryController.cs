@@ -21,7 +21,10 @@ namespace BlogWebApp.Controllers
             = new QueryViewModel<List<(int Id, string Name)>>();
         private QueryViewModel<List<User>> usersAscWithToDoDesc
             = new QueryViewModel<List<User>>();
-
+        private QueryViewModel<UserQueryViewModel> userQueryViewModel
+            = new QueryViewModel<UserQueryViewModel>();
+        private QueryViewModel<PostQueryViewModel> postQueryViewModel
+            = new QueryViewModel<PostQueryViewModel>();
 
         public QueryController(BlogQueriesService blogQueriesService)
         {
@@ -145,26 +148,72 @@ namespace BlogWebApp.Controllers
         [HttpGet]
         public IActionResult GetUserData()
         {
-            return View();
+            return View(userQueryViewModel);
         }
 
         [HttpPost]
-        public IActionResult GetUserData(int id)
+        public IActionResult GetUserData(QueryViewModel<UserQueryViewModel> queryViewModel)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var userData = _blogQueriesService.GetUserData(queryViewModel.Id);
+                    queryViewModel.QueryResult = new UserQueryViewModel()
+                    {
+                        User = userData.User,
+                        LastPost = userData.LastPost,
+                        LastPostCommentsCount = userData.LastPostCommentsCount,
+                        UncompletedTodosCount = userData.UncompletedTodosCount,
+                        PostWithMaxComments = userData.PostWithMaxComments,
+                        PostWithMaxLikes = userData.PostWithMaxLikes
+                    };
+
+                    return View(queryViewModel);
+                }
+                catch (Exception e)
+                {
+                    queryViewModel.IsExistQueryResult = false;
+                    return View(queryViewModel);
+                }
+            }
+
+            return View(userQueryViewModel);
         }
 
         //6. Show the structure: Post, Longest comment of the post, Most liked comment on the post, Number of comments under the post where or 0 likes or text length <80 (pass User Id to parameters)
         [HttpGet]
         public IActionResult GetPostData()
         {
-            return View();
+            return View(postQueryViewModel);
         }
 
         [HttpPost]
-        public IActionResult GetPostData(int id)
+        public IActionResult GetPostData(QueryViewModel<PostQueryViewModel> queryViewModel)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var postData = _blogQueriesService.GetPostData(queryViewModel.Id);
+                    queryViewModel.QueryResult = new PostQueryViewModel()
+                    {
+                        Post = postData.Post,
+                        LongestComment = postData.LongestComment,
+                        MostLikedComment = postData.MostLikedComment,
+                        MostUnpopularCommentsCount = postData.MostUnpopularCommentsCount
+                    };
+
+                    return View(queryViewModel);
+                }
+                catch (Exception e)
+                {
+                    queryViewModel.IsExistQueryResult = false;
+                    return View(queryViewModel);
+                }
+            }
+
+            return View(postQueryViewModel);
         }
     }
 }
