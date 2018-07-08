@@ -37,7 +37,17 @@
                             <div id="todos-@user.Id" class="collapse">
                                 @foreach (var todo in user.ToDos)
                                 {
-                                    <h4>@todo.Name - @todo.CreatedAt</h4>
+                                    <h4>
+                                        @if (@todo.IsComplete)
+                                        {
+                                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                        }
+                                        else
+                                        {
+                                            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                        }
+                                        @todo.Name - @todo.CreatedAt
+                                    </h4>
                                     <p>Complated: @todo.IsComplete</p>
                                 }
                             </div>
