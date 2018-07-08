@@ -14,12 +14,10 @@ namespace BlogWebApp.Services
     public class BlogLoadService
     {
         private readonly HttpClient _client;
-        private readonly IConfiguration _configuration;
 
-        public BlogLoadService(IConfiguration configuration, HttpClient client)
+        public BlogLoadService()
         {
-            _configuration = configuration;
-            _client = client;
+            _client = new HttpClient();
         }
 
         private async Task<List<T>> GetDataCollectionByEndpointAsync<T>(string endpoint) where T : IEndpoint
@@ -35,32 +33,32 @@ namespace BlogWebApp.Services
             return data;
         }
 
-        private async Task<List<User>> GetUsersAsync()
+        public async Task<List<User>> GetUsersAsync()
         {
             return await GetDataCollectionByEndpointAsync<User>(ServiceSettings.BlogSource.Endpoints.Users);
         }
 
-        private async Task<List<Post>> GetPostsAsync()
+        public async Task<List<Post>> GetPostsAsync()
         {
             return await GetDataCollectionByEndpointAsync<Post>(ServiceSettings.BlogSource.Endpoints.Posts);
         }
 
-        private async Task<List<Comment>> GetCommentsAsync()
+        public async Task<List<Comment>> GetCommentsAsync()
         {
             return await GetDataCollectionByEndpointAsync<Comment>(ServiceSettings.BlogSource.Endpoints.Comments);
         }
 
-        private async Task<List<Address>> GetAddressesAsync()
+        public async Task<List<Address>> GetAddressesAsync()
         {
             return await GetDataCollectionByEndpointAsync<Address>(ServiceSettings.BlogSource.Endpoints.Address);
         }
 
-        private async Task<List<ToDo>> GetToDosAsync()
+        public async Task<List<ToDo>> GetToDosAsync()
         {
             return await GetDataCollectionByEndpointAsync<ToDo>(ServiceSettings.BlogSource.Endpoints.ToDos);
         }
 
-        async Task<List<User>> GetComplexlyFilledUsers()
+        public async Task<List<User>> GetComplexlyFilledUsers()
         {
             List<User> users = await GetUsersAsync();
             List<Post> posts = await GetPostsAsync();

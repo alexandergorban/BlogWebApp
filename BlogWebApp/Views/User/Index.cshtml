@@ -1,8 +1,52 @@
-﻿
+﻿@model IEnumerable<BlogWebApp.Models.User>
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Users</h2>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-3">
+            <p>User</p>
+        </div>
+        <div class="col-md-3">
+            <p>Address</p>
+        </div>
+        <div class="col-md-2">
+            <p>Number of Posts</p>
+        </div>
+        <div class="col-md-2">
+            <p>Number of Comments</p>
+        </div>
+    </div>
 
+    @foreach (var user in Model)
+    {
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <img src="@user.Avatar" alt="@user.Name" class="img-circle">
+            </div>
+            <div class="col-md-3">
+                <p>@user.Name</p>
+                <p>@user.Email</p>
+
+            </div>
+            <div class="col-md-3">
+                <p>@user.Address.Country</p>
+                <p>@user.Address.City</p>
+                <p>@user.Address.Street</p>
+                <p>@user.Address.Zip</p>
+            </div>
+            <div class="col-md-2">
+                <p>@user.Posts.Count</p>
+            </div>
+            <div class="col-md-2">
+                <p>@user.Comments.Count</p>
+            </div>
+        </div>
+    }
+</div>
