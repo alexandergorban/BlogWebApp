@@ -1,8 +1,23 @@
-﻿
+﻿@model IEnumerable<BlogWebApp.Models.ToDo>
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>To Do</h2>
-
+<div class="row">
+    @foreach (var toDo in Model)
+    {
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <h4>@Html.ActionLink(@toDo.Name, "TodoDetails", new { postId = toDo.Id })</h4>
+            </div>
+            <div class="col-md-12">
+                <p>User: @Html.ActionLink(@toDo.UserId.ToString(), "UserDetails", "User", new { userId = toDo.UserId })</p>
+                <p>Is Completed: @toDo.IsComplete</p>
+                <p>Created: @toDo.CreatedAt</p>
+            </div>
+        </div>
+    }
+</div>

@@ -12,6 +12,7 @@ namespace BlogWebApp.Controllers
     public class UserController : Controller
     {
         private readonly BlogQueriesService _blogQueriesService;
+
         public UserController(BlogQueriesService blogQueriesService)
         {
             _blogQueriesService = blogQueriesService;

@@ -48,6 +48,25 @@ namespace BlogWebApp.Services
             return post;
         }
 
+        public List<ToDo> GetToDos()
+        {
+            var toDos = _complexlyFilledUsers
+                .SelectMany(user => user.ToDos)
+                .OrderByDescending(toDo => toDo.CreatedAt)
+                .ToList();
+
+            return toDos;
+        }
+
+        public ToDo GetToDo(int todoId)
+        {
+            var toDo = _complexlyFilledUsers
+                .SelectMany(user => user.ToDos)
+                .FirstOrDefault(t => t.Id == todoId);
+
+            return toDo;
+        }
+
         //1. Get the number of comments under the posts of a particular user(by Id)
         public List<(Post Post, int Comments)> GetNumberOfCommentsUnderUserPosts(int userId)
         {

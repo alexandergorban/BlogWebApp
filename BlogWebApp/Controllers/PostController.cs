@@ -11,10 +11,12 @@ namespace BlogWebApp.Controllers
     public class PostController : Controller
     {
         private readonly BlogQueriesService _blogQueriesService;
+
         public PostController(BlogQueriesService blogQueriesService)
         {
             _blogQueriesService = blogQueriesService;
         } 
+
         public IActionResult Index()
         {
             List<Post> posts = _blogQueriesService.GetPosts();
