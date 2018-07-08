@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BlogWebApp.Data;
 using BlogWebApp.Models;
 
 namespace BlogWebApp.Services
@@ -10,11 +11,25 @@ namespace BlogWebApp.Services
     {
         private readonly List<User> _complexlyFilledUsers;
 
-        public BlogQueriesService(List<User> complexlyFilledUsers)
+        public BlogQueriesService()
         {
-            _complexlyFilledUsers = complexlyFilledUsers;
+            _complexlyFilledUsers = BlogData.Users;
         }
 
+        public List<User> GetComplexlyFilledUsers()
+        {
+            return _complexlyFilledUsers;
+        }
+
+        public User GetComplexlyFilledUser(int userId)
+        {
+            var user = _complexlyFilledUsers
+                .FirstOrDefault(u => u.Id.Equals(userId));
+
+            return user;
+        }
+
+        //1. Get the number of comments under the posts of a particular user(by Id)
         public List<(Post Post, int Comments)> GetNumberOfCommentsUnderUserPosts(int userId)
         {
             var data = _complexlyFilledUsers
@@ -26,6 +41,7 @@ namespace BlogWebApp.Services
             return data;
         }
 
+        //2. Get a list of comments under the posts of a particular user (by Id), where body comment < 50 characters (list of comments)
         public List<Comment> GetShortCommentsUnderUserPosts(int userId)
         {
             var data = _complexlyFilledUsers
@@ -38,6 +54,7 @@ namespace BlogWebApp.Services
             return data;
         }
 
+        //3. Get the list (id, name) from the list of todos that are executed for a specific user (by Id)
         public List<(int Id, string Name)> GetExecutedToDoByUser(int userId)
         {
             var data = _complexlyFilledUsers
@@ -50,6 +67,7 @@ namespace BlogWebApp.Services
             return data;
         }
 
+        //4. Get a list of users in alphabetical order (ascending) with sorted To Do items by length name (descending)
         public List<User> GetUsersAscWithToDoDesc()
         {
             var data = _complexlyFilledUsers
@@ -66,6 +84,7 @@ namespace BlogWebApp.Services
             return data;
         }
 
+        //5. Get the structure: User, Last Post, Number of comments for last post, Tasks in To Do, most popular post
         public (User User,
             Post LastPost,
             int LastPostCommentsCount,
@@ -97,6 +116,7 @@ namespace BlogWebApp.Services
             return data;
         }
 
+        //6. Get the structure: Post, Longest comment of the post, Most liked comment on the post, Number of comments under the post where or 0 likes or text length <80 (pass User Id to parameters)
         public (Post Post,
             Comment LongestComment,
             Comment MostLikedComment,
