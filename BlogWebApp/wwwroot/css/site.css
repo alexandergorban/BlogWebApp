@@ -45,6 +45,11 @@
     border-radius: 10px;
 }
 
+    .general-users-list > .general-user span.glyphicon {
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
 .users-list > .user-list-header {
     font-weight: bold;
     font-size: 16px;
