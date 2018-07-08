@@ -5,7 +5,7 @@ using BlogWebApp.Interfaces;
 
 namespace BlogWebApp.Models
 {
-    class Comment : IEndpoint
+    public class Comment : IEndpoint
     {
         public int Id { get; set; }
         public int UserId { get; set; }

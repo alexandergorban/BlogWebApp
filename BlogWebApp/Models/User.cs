@@ -5,7 +5,7 @@ using BlogWebApp.Interfaces;
 
 namespace BlogWebApp.Models
 {
-    class User : IEndpoint
+    public class User : IEndpoint
     {
         public int Id { get; set; }
         public DateTime CreatedAt { get; set; }

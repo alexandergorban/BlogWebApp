@@ -5,7 +5,7 @@ using BlogWebApp.Interfaces;
 
 namespace BlogWebApp.Models
 {
-    class ToDo : IEndpoint
+    public class ToDo : IEndpoint
     {
         public int Id { get; set; }
         public int UserId { get; set; }
